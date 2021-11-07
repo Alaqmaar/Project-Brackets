@@ -48,9 +48,6 @@ while len(teams) > 1:
             pairs += [t2]
             epairs += [e2]
 
-    print(pairs)
-    print(epairs)
-
     teams = pairs
     elo = epairs
 
