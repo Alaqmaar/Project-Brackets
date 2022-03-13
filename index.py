@@ -1,57 +1,29 @@
-nTeams = int(input('Enter the number of participating teams: '))
-teams = []
-elo = []
-pairs = []
-epairs = []
+team_details = {}
+win_details = {}
 
-print()
+number_of_teams = int(input("Enter the nubmer of teams: "))
 
-for i in range(0, nTeams):
-    teams += [input('Enter the name of Team: ')]
-    elo += [int(input('Enter the teams elo (If the team is not rated, enter 0): '))]
-    print()
+for i in range(number_of_teams):
+    name_of_team = input("Enter the name of the team: ")
+    elo_of_team = int(input("Enter the elo of the team: "))
 
-if len(teams) % 2 != 0:
-    pairs += [teams[elo.index(max(elo))]]
-    epairs += [max(elo)]
+    team_details[name_of_team] = elo_of_team
 
-    print(max(elo))
-    teams.remove(teams[elo.index(max(elo))])
-    elo.remove(max(elo))
+while True:
+    while True:
+        team_one = max(team_details)
+        one_elo = team_details[team_one]
+        del team_details[team_one]
 
-i = 1
+        team_two = max(team_details)
+        two_elo = team_details[team_two]
+        del team_details[team_two]
 
-while len(teams) > 1:
-    while len(teams) > 1:
-        t1 = teams[elo.index(max(elo))]
-        e1 = max(elo)
+        winning_team = input("Enter the name of the winning team: ")
+        
+        if winning_team == team_one:
+            win_details[team_one] = one_elo
+        elif winning_team == team_two:
+            win_details[team_two] = two_elo
 
-        teams.remove(t1)
-        elo.remove(max(elo))
-
-        t2 = teams[elo.index(max(elo))]
-        e2 = max(elo)
-
-        teams.remove(t2)
-        elo.remove(max(elo))
-
-        print('Match', str(i) + ':', t1, 'vs', t2)
-
-        i += 1
-
-        win = input('Enter the name of the winning team: ')
-
-        if t1.startswith(win):
-            pairs += [t1]
-            epairs += [e1]
-        else:
-            pairs += [t2]
-            epairs += [e2]
-
-    teams = pairs
-    elo = epairs
-
-print()
-
-if len(epairs) == 1:
-    print(teams[0], 'has won the tournament!')
+        
